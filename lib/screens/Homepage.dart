@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newsapp/utilities/constants.dart';
+import 'Categories/Business.dart';
+import 'Categories/Entertainment.dart';
+import 'Categories/General.dart';
+import 'Categories/Science.dart';
+import 'Categories/Technology.dart';
+import 'Categories/Home.dart';
+import 'Categories/Sport.dart';
+import 'Categories/Health.dart';
+import 'package:newsapp/appState/AppState.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
@@ -41,6 +50,8 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppState appState = Get.find();
+
     return SafeArea(
       child: DefaultTabController(
         length: listoftabstitle.length,
@@ -60,7 +71,11 @@ class Homepage extends StatelessWidget {
               height: 30,
               child: TextField(
                 decoration: InputDecoration(
-                  suffixIcon: Icon(Icons.search),
+                  suffixIcon: GestureDetector(
+                      onTap: () {
+                        appState.getAllnews();
+                      },
+                      child: Icon(Icons.search)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                       borderSide: BorderSide(color: Colors.black, width: 1)),
@@ -111,7 +126,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(children: [
-      Text("1"),
+      Home(),
       Text("2"),
       Text("3"),
       Text("4"),
