@@ -50,7 +50,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppState appState = Get.find();
+    AppState appState = Get.put(AppState(), permanent: true);
 
     return SafeArea(
       child: DefaultTabController(
@@ -71,11 +71,8 @@ class Homepage extends StatelessWidget {
               height: 30,
               child: TextField(
                 decoration: InputDecoration(
-                  suffixIcon: GestureDetector(
-                      onTap: () {
-                        appState.getAllnews();
-                      },
-                      child: Icon(Icons.search)),
+                  suffixIcon:
+                      GestureDetector(onTap: () {}, child: Icon(Icons.search)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                       borderSide: BorderSide(color: Colors.black, width: 1)),

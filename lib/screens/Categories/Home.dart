@@ -1,32 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/appState/AppState.dart';
 import 'package:get/get.dart';
+import 'package:newsapp/utilities/constants.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AppState appState = Get.put(AppState());
-
+    AppState appstate = Get.find();
     return Container(
         margin: EdgeInsets.only(top: 10),
-        child: ListView(
-          children: appState.allNews
-              .map(
-                (article) => Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100,
-                  margin: EdgeInsets.all(2),
-                  child: Card(
-                    color: Colors.blueAccent,
-                    child: Image.network((article['urlToImage'] != null)
-                        ? article['urlToImage']
-                        : "https://i.pinimg.com/564x/1b/b0/48/1bb048ecbd3c4e6637d06a035893498e.jpg"),
-                  ),
-                ),
+        child: (appstate.isfetching == false)
+            ? SpinKitRing(
+                size: 50,
+                color: Colors.black38,
               )
-              .toList(),
-        ));
+            : Obx(
+                () => ListView.builder(
+                    itemCount: appstate.allNews.length,
+                    itemBuilder: (context, int index) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 2,
+                        margin: EdgeInsets.all(2),
+                        child: Card(
+                          elevation: 4,
+                          child: Column(children: [
+                            Container(
+                              child: Expanded(
+                                child: Image.network(
+                                  (appstate.allNews[index]['urlToImage'] !=
+                                          null)
+                                      ? appstate.allNews[index]['urlToImage']
+                                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
+                                  errorBuilder: (context, Object exception,
+                                      StackTrace? stackTrace) {
+                                    return const Text('Sorry Image not found ');
+                                  },
+                                ),
+                              ),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 10),
+                                child: Text(
+                                  "${appstate.allNews[index]['title']}",
+                                  style: karticletitlestyle,
+                                )),
+                            Container(
+                                margin: EdgeInsets.all(10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      child: Icon(Icons.share),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      margin: EdgeInsets.only(left: 140),
+                                      child: Text(
+                                        "view detail",
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
+                                    )
+                                  ],
+                                ))
+                          ]),
+                        ),
+                      );
+                    }),
+              ));
   }
 }

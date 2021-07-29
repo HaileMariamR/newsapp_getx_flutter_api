@@ -5,3 +5,10 @@ const ktabtitlestyle = TextStyle(
   color: Colors.black,
   fontFamily: 'Pacifico',
 );
+
+const karticletitlestyle = TextStyle(
+  fontFamily: 'Benne',
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);
