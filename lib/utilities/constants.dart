@@ -12,3 +12,10 @@ const karticletitlestyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20,
 );
+
+const KdateStyle = TextStyle(
+  fontFamily: 'pacifico',
+  fontSize: 15.0,
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+);

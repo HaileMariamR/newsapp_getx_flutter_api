@@ -71,18 +71,6 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Share.share(
-                                            "${appstate.allNews[index]['url']}");
-                                      },
-                                      child: Icon(
-                                        Icons.share,
-                                        color: Colors.indigo,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
                                     padding: EdgeInsets.all(5),
                                     margin: EdgeInsets.only(left: 140),
                                     child: GestureDetector(

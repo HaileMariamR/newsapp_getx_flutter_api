@@ -33,15 +33,19 @@ class Health extends StatelessWidget {
                         child: Column(children: [
                           Container(
                             child: Expanded(
-                              child: Image.network(
-                                (appstate.healthnews[index]['urlToImage'] !=
-                                        null)
-                                    ? appstate.healthnews[index]['urlToImage']
-                                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
-                                errorBuilder: (context, Object exception,
-                                    StackTrace? stackTrace) {
-                                  return const Text('Sorry Image not found ');
-                                },
+                              child: Hero(
+                                tag:
+                                    "HeroImage${appstate.healthnews[index]['title'].toString()}",
+                                child: Image.network(
+                                  (appstate.healthnews[index]['urlToImage'] !=
+                                          null)
+                                      ? appstate.healthnews[index]['urlToImage']
+                                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
+                                  errorBuilder: (context, Object exception,
+                                      StackTrace? stackTrace) {
+                                    return const Text('Sorry Image not found ');
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -67,23 +71,13 @@ class Health extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Share.share(
-                                            "${appstate.healthnews[index]['url']}");
-                                      },
-                                      child: Icon(
-                                        Icons.share,
-                                        color: Colors.indigo,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
                                     padding: EdgeInsets.all(5),
                                     margin: EdgeInsets.only(left: 140),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.to(Detail());
+                                        Get.to(() => Detail(),
+                                            arguments:
+                                                appstate.healthnews[index]);
                                       },
                                       child: Text(
                                         "view detail",

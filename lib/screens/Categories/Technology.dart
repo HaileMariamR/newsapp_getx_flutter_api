@@ -33,16 +33,21 @@ class Technology extends StatelessWidget {
                         child: Column(children: [
                           Container(
                             child: Expanded(
-                              child: Image.network(
-                                (appstate.technologynews[index]['urlToImage'] !=
-                                        null)
-                                    ? appstate.technologynews[index]
-                                        ['urlToImage']
-                                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
-                                errorBuilder: (context, Object exception,
-                                    StackTrace? stackTrace) {
-                                  return const Text('Sorry Image not found ');
-                                },
+                              child: Hero(
+                                tag:
+                                    "HeroImage${appstate.sciencenews[index]['title'].toString()}",
+                                child: Image.network(
+                                  (appstate.technologynews[index]
+                                              ['urlToImage'] !=
+                                          null)
+                                      ? appstate.technologynews[index]
+                                          ['urlToImage']
+                                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
+                                  errorBuilder: (context, Object exception,
+                                      StackTrace? stackTrace) {
+                                    return const Text('Sorry Image not found ');
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -64,18 +69,6 @@ class Technology extends StatelessWidget {
                                       child: Icon(
                                         Icons.favorite,
                                         color: Colors.teal,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Share.share(
-                                            "${appstate.technologynews[index]['url']}");
-                                      },
-                                      child: Icon(
-                                        Icons.share,
-                                        color: Colors.indigo,
                                       ),
                                     ),
                                   ),

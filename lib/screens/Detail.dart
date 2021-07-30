@@ -1,21 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:newsapp/utilities/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Detail extends StatelessWidget {
-  const Detail({Key? key}) : super(key: key);
+  Detail({Key? key}) : super(key: key);
+  String url = "";
+
+  void launchonBrowser() async {
+    await canLaunch(url) ? await launch(url) : throw "sorry, faild to launch.";
+  }
 
   @override
   Widget build(BuildContext context) {
     var newsDetail = Get.arguments;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Colors.black,
+            actions: [
+              Container(
+                margin: EdgeInsets.only(right: 15),
+                child: GestureDetector(
+                  onTap: () {
+                    Share.share("${newsDetail['url']}");
+                  },
+                  child: Icon(
+                    Icons.share,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
             pinned: true,
-            snap: false,
-            floating: false,
-            expandedHeight: MediaQuery.of(context).size.height / 3,
+            backgroundColor: Colors.black,
+            expandedHeight: MediaQuery.of(context).size.height / 1.5,
             flexibleSpace: FlexibleSpaceBar(
               title: Text('${newsDetail['source']['name']}'),
               background: Hero(
@@ -36,18 +58,95 @@ class Detail extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                tileColor: (index % 2 == 0) ? Colors.white : Colors.green[50],
-                title: Center(
-                  child: Text('$index',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 50,
-                          color: Colors.greenAccent[400]) //TextStyle
-                      ), //Text
-                ), //Center
-              ), //ListTile
-              childCount: 10,
+              (context, index) => Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 40),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "published at:  ${newsDetail['publishedAt']}",
+                      style: KdateStyle,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    child: RichText(
+                        text: TextSpan(
+                            children: [
+                          TextSpan(
+                              text: newsDetail['title'],
+                              style: TextStyle(
+                                  color: Colors.cyan,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                            text: "Title : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    child: RichText(
+                        text: TextSpan(
+                            children: [
+                          TextSpan(
+                              text: newsDetail['description'],
+                              style: TextStyle(
+                                  color: Colors.cyan,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                            text: "Description : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    child: RichText(
+                        text: TextSpan(
+                            children: [
+                          TextSpan(
+                              text: newsDetail['content'],
+                              style: TextStyle(
+                                  color: Colors.cyan,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                            text: "Content : ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 40),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "Author:  ${newsDetail['author']}",
+                      style: KdateStyle,
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(5),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        url = newsDetail['url'];
+                        launchonBrowser();
+                      },
+                      child: Text("Get Full Coverage"),
+                    ),
+                  ),
+                ],
+              ),
+              childCount: 1,
             ), //SliverChildBuildDelegate
           ) //SliverLis
         ],

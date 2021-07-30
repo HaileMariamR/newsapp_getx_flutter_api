@@ -33,17 +33,21 @@ class Entertainment extends StatelessWidget {
                         child: Column(children: [
                           Container(
                             child: Expanded(
-                              child: Image.network(
-                                (appstate.entertainmentnews[index]
-                                            ['urlToImage'] !=
-                                        null)
-                                    ? appstate.entertainmentnews[index]
-                                        ['urlToImage']
-                                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
-                                errorBuilder: (context, Object exception,
-                                    StackTrace? stackTrace) {
-                                  return const Text('Sorry Image not found ');
-                                },
+                              child: Hero(
+                                tag:
+                                    "HeroImage${appstate.sciencenews[index]['title'].toString()}",
+                                child: Image.network(
+                                  (appstate.entertainmentnews[index]
+                                              ['urlToImage'] !=
+                                          null)
+                                      ? appstate.entertainmentnews[index]
+                                          ['urlToImage']
+                                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
+                                  errorBuilder: (context, Object exception,
+                                      StackTrace? stackTrace) {
+                                    return const Text('Sorry Image not found ');
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -69,23 +73,13 @@ class Entertainment extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Share.share(
-                                            "${appstate.entertainmentnews[index]['url']}");
-                                      },
-                                      child: Icon(
-                                        Icons.share,
-                                        color: Colors.indigo,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
                                     padding: EdgeInsets.all(5),
                                     margin: EdgeInsets.only(left: 140),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.to(Detail());
+                                        Get.to(() => Detail(),
+                                            arguments: appstate
+                                                .entertainmentnews[index]);
                                       },
                                       child: Text(
                                         "view detail",

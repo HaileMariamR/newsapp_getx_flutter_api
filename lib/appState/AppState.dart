@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-final apiKey = "28b97d72f5144c86ba7d64a9e9892654";
-
 class AppState extends GetxController {
   var allNews = [].obs;
   var businessnews = [].obs;
@@ -37,7 +35,7 @@ class AppState extends GetxController {
     print("start fetching");
     try {
       http.Response response = await http.get(Uri.parse(
-          "https://newsapi.org/v2/top-headlines?country=us&${input}&apiKey=28b97d72f5144c86ba7d64a9e9892654"));
+          "https://newsapi.org/v2/top-headlines?country=us&${input}&apiKey=2b5067c486444216811881c455e42588"));
       if (response.statusCode == 200) {
         var tempresult = jsonDecode(response.body);
         finalresult = tempresult['articles'];
@@ -49,4 +47,3 @@ class AppState extends GetxController {
     return finalresult;
   }
 }
-
