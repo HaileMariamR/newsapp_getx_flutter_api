@@ -5,6 +5,7 @@ import 'package:newsapp/utilities/constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:share_plus_linux/share_plus_linux.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:newsapp/screens/Detail.dart';
 
 class Entertainment extends StatelessWidget {
   const Entertainment({Key? key}) : super(key: key);
@@ -82,9 +83,14 @@ class Entertainment extends StatelessWidget {
                                   Container(
                                     padding: EdgeInsets.all(5),
                                     margin: EdgeInsets.only(left: 140),
-                                    child: Text(
-                                      "view detail",
-                                      style: TextStyle(color: Colors.blue),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.to(Detail());
+                                      },
+                                      child: Text(
+                                        "view detail",
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
                                     ),
                                   )
                                 ],

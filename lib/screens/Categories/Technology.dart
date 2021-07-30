@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/appState/AppState.dart';
 import 'package:get/get.dart';
+import 'package:newsapp/screens/Detail.dart';
 import 'package:newsapp/utilities/constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:share_plus_linux/share_plus_linux.dart';
@@ -81,9 +82,16 @@ class Technology extends StatelessWidget {
                                   Container(
                                     padding: EdgeInsets.all(5),
                                     margin: EdgeInsets.only(left: 140),
-                                    child: Text(
-                                      "view detail",
-                                      style: TextStyle(color: Colors.blue),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Get.to(Detail(),
+                                            arguments:
+                                                appstate.technologynews[index]);
+                                      },
+                                      child: Text(
+                                        "view detail",
+                                        style: TextStyle(color: Colors.blue),
+                                      ),
                                     ),
                                   )
                                 ],
