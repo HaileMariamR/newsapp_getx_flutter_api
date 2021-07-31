@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class AppState extends GetxController {
   var allNews = [].obs;
@@ -51,6 +52,11 @@ class AppState extends GetxController {
           "https://newsapi.org/v2/top-headlines?country=us&${input}&apiKey=28b97d72f5144c86ba7d64a9e9892654"));
       if (response.statusCode == 200) {
         var tempresult = jsonDecode(response.body);
+
+        for (var item in tempresult['articles']) {
+          item['favourite'] = 0xff212121;
+        }
+
         finalresult = tempresult['articles'];
       }
     } catch (e) {}

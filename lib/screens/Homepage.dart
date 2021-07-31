@@ -11,6 +11,8 @@ import 'Categories/Sport.dart';
 import 'Categories/Health.dart';
 import 'package:newsapp/appState/AppState.dart';
 import 'package:newsapp/screens/Favourite.dart';
+import 'About.dart';
+import 'Settings.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
@@ -181,10 +183,16 @@ class Homepage extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.settings),
                     title: Text("Settings"),
+                    onTap: () {
+                      Get.to(() => Settings());
+                    },
                   ),
                   ListTile(
                     leading: Icon(Icons.details),
                     title: Text("About"),
+                    onTap: () {
+                      Get.to(() => About());
+                    },
                   ),
                 ],
               )),

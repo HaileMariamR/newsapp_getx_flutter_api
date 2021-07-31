@@ -134,19 +134,40 @@ class Detail extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () async {
-                      url = newsDetail['url'];
-                      launchonBrowser();
+                    onTap: () {
+                      Get.snackbar(
+                          "Favourite", "sucessfully added to favourite",
+                          colorText: Colors.amber,
+                          backgroundColor: Colors.white);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       color: Colors.pink,
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        "Get Full Coverage",
+                        "Add to favourite",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      url = newsDetail['url'];
+                      launchonBrowser();
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.black,
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        "Get Full Coverage",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),

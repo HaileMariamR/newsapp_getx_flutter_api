@@ -10,14 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
-  void addtofavourite() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString("favourite", "favourite");
-  }
+  // void addtofavourite() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   sharedPreferences.setString("favourite", "favourite");
+  // }
 
   @override
   Widget build(BuildContext context) {
     AppState appstate = Get.find();
+
     return Container(
         margin: EdgeInsets.only(top: 10),
         child: Obx(
@@ -48,7 +49,8 @@ class Home extends StatelessWidget {
                                       : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGVlwDhbC-6RixbdgEwDrABJ6BD3hhM2eJA&usqp=CAU",
                                   errorBuilder: (context, Object exception,
                                       StackTrace? stackTrace) {
-                                    return const Text('Sorry Image not found ');
+                                    return const Text(
+                                        'Sorry! Image not found ');
                                   },
                                 ),
                               ),
@@ -62,29 +64,14 @@ class Home extends StatelessWidget {
                               )),
                           Container(
                               margin: EdgeInsets.all(10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                              child: Stack(
                                 children: [
                                   Container(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        
-                                        Get.to(() => Favorite(),
-                                            arguments: appstate.allNews[index]);
-                                      },
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: Colors.teal,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
                                     padding: EdgeInsets.all(5),
-                                    margin: EdgeInsets.only(left: 140),
+                                    margin: EdgeInsets.only(left: 140, top: 0),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.to(Detail(),
+                                        Get.to(() => Detail(),
                                             arguments: appstate.allNews[index]);
                                       },
                                       child: Text(

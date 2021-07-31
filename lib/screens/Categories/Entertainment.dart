@@ -64,15 +64,6 @@ class Entertainment extends StatelessWidget {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Container(
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: Colors.teal,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
                                     padding: EdgeInsets.all(5),
                                     margin: EdgeInsets.only(left: 140),
                                     child: GestureDetector(
