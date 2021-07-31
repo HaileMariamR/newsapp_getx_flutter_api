@@ -8,7 +8,7 @@ class Favorite extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         title: Text("Favourite page"),
       ),
       body: Center(

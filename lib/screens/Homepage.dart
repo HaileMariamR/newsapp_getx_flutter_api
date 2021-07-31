@@ -214,11 +214,24 @@ class Homepage extends StatelessWidget {
                   ),
                 ),
                 actions: [
-                  Container(
-                      width: 20,
-                      margin: EdgeInsets.only(right: 10),
-                      child: TextButton(
-                          onPressed: () {}, child: Icon(Icons.notifications)))
+                  Stack(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 15, right: 25),
+                          child: Icon(
+                            Icons.notification_add,
+                            color: Colors.red,
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(top: 15),
+                        padding: EdgeInsets.only(left: 23),
+                        child: Text(
+                          "${appState.allNews.length}",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
                 elevation: 0,
                 iconTheme: IconThemeData(color: Colors.black87),

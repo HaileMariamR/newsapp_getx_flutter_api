@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/appState/AppState.dart';
 import 'package:get/get.dart';
+import 'package:newsapp/screens/Favourite.dart';
 import 'package:newsapp/utilities/constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:newsapp/screens/Detail.dart';
@@ -67,7 +68,11 @@ class Home extends StatelessWidget {
                                 children: [
                                   Container(
                                     child: GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        
+                                        Get.to(() => Favorite(),
+                                            arguments: appstate.allNews[index]);
+                                      },
                                       child: Icon(
                                         Icons.favorite,
                                         color: Colors.teal,
