@@ -4,7 +4,7 @@ import 'screens/Homepage.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    title: "New App",
+    title: "News App",
     debugShowCheckedModeBanner: false,
     home: Homepage(),
   ));

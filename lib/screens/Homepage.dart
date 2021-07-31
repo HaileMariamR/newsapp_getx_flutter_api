@@ -59,10 +59,132 @@ class Homepage extends StatelessWidget {
           child: Builder(builder: (BuildContext context) {
             return Scaffold(
               drawer: Drawer(
-                  child: Column(
+                  child: ListView(
                 children: [
                   DrawerHeader(
-                    child: Container(),
+                    decoration: BoxDecoration(color: Colors.deepPurpleAccent),
+                    padding: EdgeInsets.zero,
+                    child: Stack(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 130, left: 20),
+                          child: Text(
+                            "se.hailemariam.fikadie@gmail.com",
+                            style: TextStyle(color: Colors.black, fontSize: 15),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 90, left: 20),
+                          child: Text(
+                            "Eharry",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'pacifico',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 30, left: 20),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(
+                                "https://media-exp1.licdn.com/dms/image/C4E03AQGlC95Zri6GaA/profile-displayphoto-shrink_800_800/0/1574148998530?e=1632960000&v=beta&t=Su5ndfMs12vGrMoL95_6DiKTFHjTXQyZpJ6pMEmEYU8"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  Divider(
+                    height: 1,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.home),
+                    title: Text("Home"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(0);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.business),
+                    title: Text("Business"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(1);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.emoji_emotions),
+                    title: Text("Entertainment"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(2);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.ac_unit),
+                    title: Text("General"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(3);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.health_and_safety),
+                    title: Text("Health"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(4);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.sports),
+                    title: Text("Sports"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(5);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.cloud),
+                    title: Text("Technology"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(6);
+                      Get.back();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.science),
+                    title: Text("Science"),
+                    onTap: () {
+                      DefaultTabController.of(context)!.animateTo(7);
+                      Get.back();
+                    },
+                  ),
+                  Divider(
+                    height: 1,
+                    thickness: 2,
+                  ),
+                  Text(""),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text("Settings"),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.details),
+                    title: Text("About"),
                   ),
                 ],
               )),
@@ -123,8 +245,7 @@ class Homepage extends StatelessWidget {
                       padding: EdgeInsets.only(top: 5),
                       child: GestureDetector(
                           onTap: () async {
-                            await appState.getAllnews(
-                                input: "category=business");
+                            await appState.getAllnews();
                             DefaultTabController.of(context)!.animateTo(0);
                           },
                           child: Icon(

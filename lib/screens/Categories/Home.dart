@@ -3,12 +3,16 @@ import 'package:newsapp/appState/AppState.dart';
 import 'package:get/get.dart';
 import 'package:newsapp/utilities/constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:share_plus_linux/share_plus_linux.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:newsapp/screens/Detail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
+
+  void addtofavourite() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString("favourite", "favourite");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +83,7 @@ class Home extends StatelessWidget {
                                             arguments: appstate.allNews[index]);
                                       },
                                       child: Text(
-                                        "view detail",
+                                        "more..",
                                         style: TextStyle(color: Colors.blue),
                                       ),
                                     ),

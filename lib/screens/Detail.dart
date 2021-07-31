@@ -77,7 +77,7 @@ class Detail extends StatelessWidget {
                           TextSpan(
                               text: newsDetail['title'],
                               style: TextStyle(
-                                  color: Colors.cyan,
+                                  color: Colors.black87,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w500)),
                         ],
@@ -96,7 +96,7 @@ class Detail extends StatelessWidget {
                           TextSpan(
                               text: newsDetail['description'],
                               style: TextStyle(
-                                  color: Colors.cyan,
+                                  color: Colors.black87,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w500)),
                         ],
@@ -115,7 +115,7 @@ class Detail extends StatelessWidget {
                           TextSpan(
                               text: newsDetail['content'],
                               style: TextStyle(
-                                  color: Colors.cyan,
+                                  color: Colors.black87,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w500)),
                         ],
@@ -133,15 +133,23 @@ class Detail extends StatelessWidget {
                       style: KdateStyle,
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.all(5),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        url = newsDetail['url'];
-                        launchonBrowser();
-                      },
-                      child: Text("Get Full Coverage"),
+                  GestureDetector(
+                    onTap: () async {
+                      url = newsDetail['url'];
+                      launchonBrowser();
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.pink,
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        "Get Full Coverage",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
                     ),
                   ),
                 ],
