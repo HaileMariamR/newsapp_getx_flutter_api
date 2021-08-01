@@ -282,7 +282,7 @@ class Homepage extends StatelessWidget {
                       padding: EdgeInsets.only(top: 5),
                       child: GestureDetector(
                           onTap: () async {
-                            Get.to(Favorite());
+                            Get.to(Favourite());
                           },
                           child: Icon(
                             Icons.favorite,

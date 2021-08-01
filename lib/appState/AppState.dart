@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+import 'package:newsapp/data/appdatabase.dart';
+import 'package:newsapp/data/newsmodel.dart';
+
 class AppState extends GetxController {
   var allNews = [].obs;
   var businessnews = [].obs;
@@ -20,16 +23,12 @@ class AppState extends GetxController {
   var isfetching = false.obs;
   var x = 6.obs;
 
-  var isfavouriteIconClicked = false.obs;
+  var favouriteNews = [].obs;
 
-  var favouriteColor = 0xff009688.obs;
-
-  void setFavouriteColor() {
-    favouriteColor.value = 0xffE91E63;
-  }
-
+  AppDatabase appDatabase = AppDatabase();
   @override
   void onInit() async {
+    favouriteNews.value = await appDatabase.getNews();
     allNews.value = await getAllnews();
     count = RxInt(allNews.length);
     businessnews.value = await getAllnews(input: "category=business");
@@ -49,7 +48,7 @@ class AppState extends GetxController {
     print("start fetching");
     try {
       http.Response response = await http.get(Uri.parse(
-          "https://newsapi.org/v2/top-headlines?country=us&${input}&apiKey=28b97d72f5144c86ba7d64a9e9892654"));
+          "https://newsapi.org/v2/top-headlines?country=us&${input}&apiKey=2b5067c486444216811881c455e42588"));
       if (response.statusCode == 200) {
         var tempresult = jsonDecode(response.body);
 

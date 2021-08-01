@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
+import 'package:newsapp/data/newsmodel.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:newsapp/utilities/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:newsapp/appState/AppState.dart';
 
 class Detail extends StatelessWidget {
   Detail({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var newsDetail = Get.arguments;
+    AppState appstate = Get.find();
 
     return Scaffold(
       body: CustomScrollView(
@@ -135,10 +138,21 @@ class Detail extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      appstate.appDatabase.addtoFavourite(
+                        News(
+                          url: newsDetail['url'],
+                          title: newsDetail['title'],
+                          urlToImage: newsDetail['urlToImage'],
+                        ),
+                      );
+
+                      appstate.favouriteNews.value =
+                          appstate.appDatabase.getNews() as List;
+
                       Get.snackbar(
                           "Favourite", "sucessfully added to favourite",
-                          colorText: Colors.amber,
-                          backgroundColor: Colors.white);
+                          colorText: Colors.white,
+                          backgroundColor: Colors.black);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
