@@ -36,7 +36,9 @@ class AppDatabase {
   }
 
   Future addtoFavourite(News news) async {
+    print("start adding");
     await newsStore.add(_database!, news.tojson());
+    print("finish adding");
   }
 
   Future deleteFavourite(News news) async {
@@ -54,8 +56,5 @@ class AppDatabase {
       final news = News.fromJson(e.value);
       return news;
     }).toList();
-
-
-    
   }
 }

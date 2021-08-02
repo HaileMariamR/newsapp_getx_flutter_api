@@ -13,9 +13,13 @@ import 'package:newsapp/appState/AppState.dart';
 import 'package:newsapp/screens/Favourite.dart';
 import 'About.dart';
 import 'Settings.dart';
+import 'searchresult.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
+
+  var mycontroller = TextEditingController();
+
   List<Widget> listoftabstitle = [
     Text(
       "Home",
@@ -204,7 +208,11 @@ class Homepage extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                       suffixIcon: GestureDetector(
-                          onTap: () {}, child: Icon(Icons.search)),
+                          onTap: () async {
+                            Get.to(() => SearchResult());
+                            await appState.searchNews("${mycontroller.text}");
+                          },
+                          child: Icon(Icons.search)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                           borderSide:
@@ -234,7 +242,7 @@ class Homepage extends StatelessWidget {
                         margin: EdgeInsets.only(top: 15),
                         padding: EdgeInsets.only(left: 23),
                         child: Text(
-                          "${appState.allNews.length}",
+                          "${appState.count}",
                           style: TextStyle(color: Colors.red),
                         ),
                       )

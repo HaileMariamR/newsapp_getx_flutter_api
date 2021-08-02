@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:newsapp/data/newsmodel.dart';
+import 'package:newsapp/screens/Favourite.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:newsapp/utilities/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -42,9 +43,9 @@ class Detail extends StatelessWidget {
             backgroundColor: Colors.black,
             expandedHeight: MediaQuery.of(context).size.height / 1.5,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('${newsDetail['source']['name']}'),
+              title: Text('${(newsDetail['source'] != null)?newsDetail['source']['name'] :""}'),
               background: Hero(
-                tag: "HeroImage${newsDetail['title'].toString()}",
+                tag: "HeroImage${(newsDetail['title'].toString() != null)?newsDetail['title'].toString():""}",
                 child: Container(
                   child: Image.network(
                     (newsDetail['urlToImage'] != null)
@@ -67,7 +68,7 @@ class Detail extends StatelessWidget {
                     margin: EdgeInsets.only(left: 40),
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      "published at:  ${newsDetail['publishedAt']}",
+                      "published at:  ${(newsDetail['publishedAt'] != null) ? newsDetail['publishedAt'] : ""}",
                       style: KdateStyle,
                     ),
                   ),
@@ -97,7 +98,9 @@ class Detail extends StatelessWidget {
                         text: TextSpan(
                             children: [
                           TextSpan(
-                              text: newsDetail['description'],
+                              text: (newsDetail['description'] != null)
+                                  ? newsDetail['description']
+                                  : "",
                               style: TextStyle(
                                   color: Colors.black87,
                                   fontSize: 15.0,
@@ -116,7 +119,9 @@ class Detail extends StatelessWidget {
                         text: TextSpan(
                             children: [
                           TextSpan(
-                              text: newsDetail['content'],
+                              text: (newsDetail['content'] != null)
+                                  ? newsDetail['content']
+                                  : "",
                               style: TextStyle(
                                   color: Colors.black87,
                                   fontSize: 15.0,
@@ -132,13 +137,13 @@ class Detail extends StatelessWidget {
                     margin: EdgeInsets.only(left: 40),
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      "Author:  ${newsDetail['author']}",
+                      "Author:  ${(newsDetail['author'] != null) ? newsDetail['author'] : ""}",
                       style: KdateStyle,
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      appstate.appDatabase.addtoFavourite(
+                    onTap: () async {
+                      await appstate.addtofavourite(
                         News(
                           url: newsDetail['url'],
                           title: newsDetail['title'],
@@ -146,13 +151,13 @@ class Detail extends StatelessWidget {
                         ),
                       );
 
-                      appstate.favouriteNews.value =
-                          appstate.appDatabase.getNews() as List;
-
+                      await appstate.getfavourite();
                       Get.snackbar(
                           "Favourite", "sucessfully added to favourite",
                           colorText: Colors.white,
                           backgroundColor: Colors.black);
+
+                      Get.to(() => Favourite());
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
