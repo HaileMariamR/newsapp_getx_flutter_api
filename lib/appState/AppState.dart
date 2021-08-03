@@ -29,6 +29,7 @@ class AppState extends GetxController {
 
   @override
   void onInit() async {
+    getfavourite();
     allNews.value = await getAllnews();
     count.value = allNews.value.length;
     businessnews.value = await getAllnews(input: "category=business");
