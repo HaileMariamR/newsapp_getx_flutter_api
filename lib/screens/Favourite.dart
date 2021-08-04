@@ -12,6 +12,7 @@ class Favourite extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState appstate = Get.find();
     return Scaffold(
+        
         appBar: AppBar(
           backgroundColor: Colors.black26,
         ),
